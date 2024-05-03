@@ -39,7 +39,6 @@ export default function MoviePage() {
         const genres_ids=sessionStorage.getItem('genres');
         const id=sessionStorage.getItem('id');
 
-        console.log(title)
         console.log(id)
         console.log(genres_ids);
 
