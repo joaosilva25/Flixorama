@@ -8,6 +8,8 @@ interface Movie {
     release_date: string;
     genre_ids: string; 
     id: string;
+    title:string;
+    dateRelease:string
 }
 
 

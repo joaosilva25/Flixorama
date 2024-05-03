@@ -3,11 +3,12 @@ import '../styles/globals.css';
 import { MenuBar } from "@/components/MenuBar";
 import Link from "next/link";
 import styles from "../styles/HudMovies.module.css"
+import movie from "../types/movie"
 
 
 export default function MyList() {
 
-    const [movie,setMovie]=useState<string[]>([]);
+    const [movie,setMovie]=useState<movie[]>([]);
     const [moviePosters,setMoviePosters]=useState<string[]>([]);
     const [showMoviesList,setMoviesList]=useState(false);
 
