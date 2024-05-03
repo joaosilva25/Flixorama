@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Link from 'next/link';
 import { MenuBar } from "@/components/MenuBar";
 import styles from "../styles/HudMovies.module.css"
+import movie from "../types/movie"
 
 export default function MovieSearch() {
 
@@ -35,13 +36,13 @@ export default function MovieSearch() {
                 let posters=[];
 
                 if (moviesObject.results.backdrop_path !=null) {
-                    posters = moviesObject.results.map(movie =>
+                    posters = moviesObject.results.map((movie:movie) =>
                         `https://image.tmdb.org/t/p/original/${movie.backdrop_path}`
                     )
                 }
 
                 else {
-                    posters = moviesObject.results.map(movie =>
+                    posters = moviesObject.results.map((movie:movie) =>
                         `https://image.tmdb.org/t/p/original/${movie.poster_path}`
                     )
                 }

@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { MenuBar } from './MenuBar';
 import Link from 'next/link';
 import styles from "../styles/HudMovies.module.css"
+import movie from "../types/movie"
 
 
 
@@ -16,7 +17,7 @@ type Props= {
 export const ShowMoviesGenres=({genreCode,genreName,genrePage}:Props)=> {
         const [movieTitle,setMovieTitle]=useState('')
         const [movieImage,setMovieImage]=useState('')
-        const [movies,setMovies]=useState([]);
+        const [movies,setMovies]=useState<movie[]>([]);
         const [moviePosters,setMoviePosters]=useState<string[]>([]);
 
         useEffect(() => {
@@ -34,12 +35,12 @@ export const ShowMoviesGenres=({genreCode,genreName,genrePage}:Props)=> {
                             let posters=[];
 
                             if(response.results.backdrop_path !=null) {
-                                posters = response.results.map(movie =>
+                                posters = response.results.map((movie:movie) =>
                                     `https://image.tmdb.org/t/p/original/${movie.backdrop_path}`
                                 )
                             }
                             else {
-                                posters = response.results.map(movie =>
+                                posters = response.results.map((movie:movie) =>
                                     `https://image.tmdb.org/t/p/original/${movie.poster_path}`
                                 )
                             }

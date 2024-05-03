@@ -10,20 +10,24 @@ export const LoadingPage=()=> {
     const [showLoading,setShowLoading] = useState(false)
 
     useEffect(()=> {
-        const toggleShow=()=> {setTimeout(()=> {
+        const toggleShow=()=> {
+            const timer1=setTimeout(()=> {
                 setShowAllLetter(false)
                 setLetter('text-white text-8xl')
                 setShowLoading(true)
             },800)
-            setTimeout(()=> {
+            const timer2=setTimeout(()=> {
                 setShowAllLetter(true)
             },1400)
+
+            
+            return () => {
+                clearTimeout(timer1);
+                clearTimeout(timer2);
+            }
         }
 
         toggleShow()
-
-        return () => clearTimeout();
-
     },[]);
 
     return (

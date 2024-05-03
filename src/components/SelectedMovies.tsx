@@ -4,12 +4,14 @@ import styles from "../styles/HudMovies.module.css"
 import { Container } from "postcss";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
+import movie from "../types/movie"
+
 
 
 export const SelectedMoviesCard=()=> {
 
     const [genresCode,setGenresCode]=useState<string[]>([]);
-    const [recommendedMovies,setRecommendedMovies]=useState([]);
+    const [recommendedMovies,setRecommendedMovies]=useState<movie[]>([]);
     const [recommendedMoviesPoster,setRecommendedMoviesPoster]=useState<any>([]);
     const [cordinateXMove,setCordinateXMove]=useState(0);
 
