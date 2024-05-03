@@ -60,7 +60,7 @@ export const ShowMoviesGenres=({genreCode,genreName,genrePage}:Props)=> {
     
             MovieRequest();
             
-        }, [genrePage]);
+        }, [genreCode,genrePage]);
         
         const sendMovieDates=(moviePoster:string,movieTitle:string,movieAvaliation:string,movieOverview:string,movieReleaseDate:string,movieGenres:string,movieId:string)=> {
             sessionStorage.setItem('poster',moviePoster)
