@@ -1,5 +1,5 @@
 "use client"
-import { ShowMoviesGenres } from "@/components/ShowMoviesGenres"
+import  ShowMoviesGenres from "@/components/ShowMoviesGenres"
 import { useEffect, useState } from "react"
 
 

@@ -4,7 +4,7 @@ import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
 
 
-export const LoadingPage=()=> {
+const LoadingPage=()=> {
     const [letter,setLetter]=useState('text-cyan-500')
     const [showAllLetter,setShowAllLetter] = useState(true)
     const [showLoading,setShowLoading] = useState(false)
@@ -40,3 +40,5 @@ export const LoadingPage=()=> {
         </div>
     )
 }
+
+export default LoadingPage;

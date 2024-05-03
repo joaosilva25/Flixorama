@@ -1,4 +1,4 @@
-import { ShowMoviesGenres } from "@/components/ShowMoviesGenres"
+import ShowMoviesGenres from "@/components/ShowMoviesGenres"
 import { useState,useEffect } from "react";
 
 export default function Action() {

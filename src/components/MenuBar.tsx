@@ -6,7 +6,7 @@ import { useEffect,useState } from 'react';
 import { useRouter } from 'next/router';
 
 
-export const MenuBar=()=> {
+const MenuBar=()=> {
 
     const route=useRouter();
 
@@ -144,3 +144,5 @@ export const MenuBar=()=> {
         </>
     )
 }
+
+export default MenuBar;

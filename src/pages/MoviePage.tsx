@@ -1,5 +1,5 @@
 "use client"
-import { MenuBar } from "@/components/MenuBar";
+import MenuBar from "@/components/MenuBar";
 import '../styles/globals.css';
 import { MoviesBox } from "@/components/MoviesBox";
 import { useEffect,useState } from "react";

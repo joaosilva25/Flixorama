@@ -13,8 +13,7 @@ type Props= {
     genrePage:number
 }
 
-
-export const ShowMoviesGenres=({genreCode,genreName,genrePage}:Props)=> {
+const ShowMoviesGenres=({genreCode,genreName,genrePage}:Props)=> {
         const [movieTitle,setMovieTitle]=useState('')
         const [movieImage,setMovieImage]=useState('')
         const [movies,setMovies]=useState<movie[]>([]);
@@ -97,3 +96,6 @@ export const ShowMoviesGenres=({genreCode,genreName,genrePage}:Props)=> {
             </div>
         )
     }
+
+
+export default ShowMoviesGenres;

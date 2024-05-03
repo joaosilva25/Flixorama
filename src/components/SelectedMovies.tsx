@@ -8,7 +8,7 @@ import movie from "../types/movie"
 
 
 
-export const SelectedMoviesCard=()=> {
+const SelectedMoviesCard=()=> {
 
     const [genresCode,setGenresCode]=useState<string[]>([]);
     const [recommendedMovies,setRecommendedMovies]=useState<movie[]>([]);
@@ -149,3 +149,5 @@ export const SelectedMoviesCard=()=> {
         </div>
     )
 }
+
+export default SelectedMoviesCard;

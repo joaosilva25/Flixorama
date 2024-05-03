@@ -1,9 +1,9 @@
 "use client"
-import { MenuBar } from "@/components/MenuBar";
+import MenuBar from "@/components/MenuBar";
 import '../styles/globals.css';
 import { MoviesBox } from "@/components/MoviesBox";
 import { useRouter } from 'next/router';
-import { LoadingPage } from "./LoadingPage";
+import LoadingPage from "./LoadingPage";
 import { useEffect } from "react";
 
 
