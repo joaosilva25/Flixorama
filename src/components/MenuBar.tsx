@@ -2,6 +2,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
+import '../styles/globals.css';
 import { useEffect,useState } from 'react';
 import { useRouter } from 'next/router';
 

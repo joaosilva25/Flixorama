@@ -1,4 +1,5 @@
 import ShowMoviesGenres from "@/components/ShowMoviesGenres"
+import '../styles/globals.css';
 import { useState,useEffect } from "react";
 
 

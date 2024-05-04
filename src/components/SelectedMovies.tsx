@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react"
 import Link from "next/link";
+import '../styles/globals.css';
 import styles from "../styles/HudMovies.module.css"
 import { Container } from "postcss";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Link from 'next/link';
 import MenuBar from "@/components/MenuBar";
+import '../styles/globals.css';
 import styles from "../styles/HudMovies.module.css"
 import movie from "../types/movie"
 

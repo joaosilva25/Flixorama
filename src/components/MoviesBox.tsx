@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faThumbsUp, faThumbsDown,faPlay } from '@fortawesome/free-solid-svg-icons';
 import { faStar, faEye,faEyeSlash } from '@fortawesome/free-regular-svg-icons';
+import '../styles/globals.css';
 import styles from "../styles/HudMovies.module.css"
 
 

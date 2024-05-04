@@ -1,5 +1,6 @@
 "use client"
 import  ShowMoviesGenres from "@/components/ShowMoviesGenres"
+import '../styles/globals.css';
 import { useEffect, useState } from "react"
 
 
