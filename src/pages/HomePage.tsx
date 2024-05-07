@@ -4,6 +4,7 @@ import '../styles/globals.css';
 import { MoviesBox } from "@/components/MoviesBox";
 import SelectedMoviesCard from "@/components/SelectedMovies";
 import { useEffect,useState } from "react";
+import ProtectRoute from "@/components/ProtectRoute";
 
 
 
@@ -29,9 +30,11 @@ export default function HomePage() {
     
 
     const MovieRequest = async () => {
-
+        setForAddListMsg("Adicionar");
         try {
-            const req= await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=23e36f1698459eaf0b278eb6a5a008b1&language=pt-BR&sort_by=popularity.desc`);
+            let apiKey:string|any=process.env.NODE_ENV==='development'?process.env.NEXT_PUBLIC_API_KEY:process.env.API_KEY
+
+            const req= await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=pt-BR&sort_by=popularity.desc`);
             
             if (req.ok) {
                 const data = await req.json();
@@ -84,7 +87,6 @@ export default function HomePage() {
 const addMyList=async()=> {
             
     const userLogged=sessionStorage.getItem('userKey')
-    console.log(userLogged)
                 
     if(userLogged) {
         const userEmail=JSON.parse(userLogged)
@@ -101,7 +103,8 @@ const addMyList=async()=> {
                 genre:genres,
                 overview:overview,
                 dataRelease:releaseDate,
-                id:movieId
+                id:movieId,
+                average:movieAvaliation
             }),
             headers:{'Content-Type': 'application/json'}
         })
@@ -112,7 +115,7 @@ const addMyList=async()=> {
             setForAddListMsg(response.message);
 
             setTimeout(()=> {
-                setForAddListMsg("");
+                setForAddListMsg("Adicionar");
             },2000)
         }
     }
@@ -125,29 +128,30 @@ const addMyList=async()=> {
 
 
     return (
-        <div className="bg-gray-900 h-screen">
-            <>
-              <MenuBar/>
-              <MoviesBox
-                titleMovie={movieTitle}
-                posterMovie={movieImage}
-                releaseDate={releaseDate}
-                overviewMovie={overview}
-                genresMovie={genres}
-                avaliationMovie={movieAvaliation}
-                addMylist={addMyList}
-                forAddListMsg={forAddListMsg}
-                showTrailerButton={false}
-              />
-            </>
-            <div className="bg-gray-900 h-3/4 gap-10 flex flex-col items-center">
-                <h1 className="text-white text-4xl font-bold mt-12">O que selecionamos para você !</h1>
-                <h2 className="text-white text-xl w-1/2 text-center font-light">Levando em consideração os seus gostos pessoais
-                    nos escolhemos estes filmes para você possa assistir adicione novos filmes em sua lista para que possamos indicar
-                    novos filmes que você possa gostar
-                </h2>
-                <SelectedMoviesCard/>
+        <ProtectRoute>
+            <div className="bg-gray-900 h-screen sm:h-full">
+                <>
+                <MenuBar/>
+                <MoviesBox
+                    titleMovie={movieTitle}
+                    posterMovie={movieImage}
+                    releaseDate={releaseDate}
+                    overviewMovie={overview}
+                    genresMovie={genres}
+                    avaliationMovie={movieAvaliation}
+                    addMylist={addMyList}
+                    forAddListMsg={forAddListMsg}
+                    showTrailerButton={false}
+                />
+                </>
+                <div className="bg-gray-900 h-3/4 gap-10 flex flex-col items-center">
+                    <h1 className="text-white font-bold mt-12 sm:text-xl md:text-3xl lg:text-4xl">O que selecionamos para você !</h1>
+                    <h2 className="text-white text-center font-light sm:text-sm sm:w-80  md:w-3/4 md:text-xl lg:w-1/3 lg:text-xl">Levando em consideração os seus gostos pessoais
+                        nos escolhemos estes filmes que possívelmente você adoraria conhecer
+                    </h2>
+                    <SelectedMoviesCard/>
+                </div>
             </div>
-        </div>
+        </ProtectRoute>
       );
 }

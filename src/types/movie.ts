@@ -9,8 +9,10 @@ interface Movie {
     genre_ids: string; 
     id: string;
     title:string;
-    dateRelease:string
+    dateRelease:string;
+    average:number;
 }
+
 
 
 export default Movie

@@ -19,11 +19,14 @@ const ShowMoviesGenres=({genreCode,genreName,genrePage}:Props)=> {
         const [movieImage,setMovieImage]=useState('')
         const [movies,setMovies]=useState<movie[]>([]);
         const [moviePosters,setMoviePosters]=useState<string[]>([]);
-
+    
         useEffect(() => {
+            let apiKey:string|any=process.env.NODE_ENV==='development'?process.env.NEXT_PUBLIC_API_KEY:process.env.API_KEY
+
             const MovieRequest = async () => {
+
                 try {
-                    const req = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=23e36f1698459eaf0b278eb6a5a008b1&language=pt-BR&with_genres=${genreCode}&page=${genrePage}`);
+                    const req = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=pt-BR&with_genres=${genreCode}&page=${genrePage}`);
     
                     if (req.ok) {
                         const response = await req.json();
@@ -76,12 +79,12 @@ const ShowMoviesGenres=({genreCode,genreName,genrePage}:Props)=> {
 
     
         return (
-            <div className='bg-gray-900 h-screen'>
+            <div className='bg-gray-900'>
                 <MenuBar/>
                 <div className='bg-gray-900 p-24 items-center justify-center'>
-                    <h3 className="text-white font-semibold text-2xl ml-24">{genreName}</h3>
+                    <h3 className="text-white font-semibold text-2xl sm:text-xl sm:relative sm:right-8 sm:bottom-8 md:ml-0 lg:ml-32">{genreName}</h3>
                     <div className='flex items-center justify-center'>
-                        <div className="p-8 flex gap-3 flex-wrap mt-38 w-3/4"> 
+                        <div className="p-8 flex gap-3 flex-wrap lg:mt-30 lg:w-3/4 md:w-full md:mt-10"> 
                         {movies.map((movie, index) => (
                             <div key={index} className="flex flex-col items-center"> {/* Adicionado um container flexível para alinhar o título e a imagem verticalmente */}
                         {moviePosters[index] && (

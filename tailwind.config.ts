@@ -13,6 +13,17 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      screens: {
+        'sm': {'min': '360px', 'max': '639px'}, 
+      },
+      width: {
+        'movieBoxMobile':'300px',
+        'movieBoxMdAndLgDevices':'550px'
+      },
+      height: {
+        'movieBoxMobile':'450px',
+        'movieBoxMdAndLgDevices':'700px'
+      }
     },
   },
   plugins: [],

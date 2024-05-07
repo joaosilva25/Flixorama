@@ -3,6 +3,7 @@ import MenuBar from "@/components/MenuBar";
 import '../styles/globals.css';
 import { MoviesBox } from "@/components/MoviesBox";
 import { useEffect,useState } from "react";
+import ProtectRoute from "@/components/ProtectRoute";
 
 
 
@@ -23,6 +24,7 @@ export default function MoviePage() {
     useEffect(()=> {
         setMovieImage("")
         setMovieTitle("")
+        setForAddListMsg("Adicionar")
 
         const userLogged=sessionStorage.getItem('userKey')
                 
@@ -39,8 +41,6 @@ export default function MoviePage() {
         const genres_ids=sessionStorage.getItem('genres');
         const id=sessionStorage.getItem('id');
 
-        console.log(id)
-        console.log(genres_ids);
 
         if(title && image && avaliation && overview && release_date && genres_ids && id) {
             setMovieTitle(title)
@@ -59,7 +59,9 @@ export default function MoviePage() {
     useEffect(()=> {
 
         const MovieReview=async()=> {
-            const req=await fetch(`https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=23e36f1698459eaf0b278eb6a5a008b1&language=pt-BR`)
+            let apiKey:string|any=process.env.NODE_ENV==='development'?process.env.NEXT_PUBLIC_API_KEY:process.env.API_KEY
+
+            const req=await fetch(`https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${apiKey}&language=pt-BR`)
             const res=await req.json();
             
             if(res.results && res.results.length>0 && res.results[0].key) {
@@ -92,7 +94,8 @@ export default function MoviePage() {
                     genre:movieGenres,
                     overview:movieOverview,
                     dataRelease:movieReleaseDate,
-                    id:movieId
+                    id:movieId,
+                    average:movieAvaliation
                 }),
                 headers:{'Content-Type': 'application/json'}
             })
@@ -102,7 +105,7 @@ export default function MoviePage() {
             if(response.message) {
                 setForAddListMsg(response.message);
                 setTimeout(()=> {
-                    setForAddListMsg("");
+                    setForAddListMsg("Adicionar")
                 },2000)
             }
         }
@@ -113,6 +116,7 @@ export default function MoviePage() {
     }
 
     return (
+        <ProtectRoute>
             <div className="bg-gray-900 h-screen">
               <MenuBar/>
               <MoviesBox
@@ -127,5 +131,6 @@ export default function MoviePage() {
                 showTrailerButton={true}
               />
             </div>
+        </ProtectRoute>
       );
 }

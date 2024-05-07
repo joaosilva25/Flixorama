@@ -4,6 +4,7 @@ import MenuBar from "@/components/MenuBar";
 import '../styles/globals.css';
 import styles from "../styles/HudMovies.module.css"
 import movie from "../types/movie"
+import ProtectRoute from "@/components/ProtectRoute";
 
 export default function MovieSearch() {
 
@@ -12,12 +13,10 @@ export default function MovieSearch() {
     const [titleFound,setTitleFound]=useState("");
     const [forUserMsg,setForUserMsg]=useState(false);
 
+    const moviesFounded:any|string=sessionStorage.getItem('foundMovies')
+    const titleFounded:any|string=sessionStorage.getItem('searchedTitle')
 
     useEffect(()=> {
-
-        const moviesFounded=sessionStorage.getItem('foundMovies')
-        console.log(moviesFounded);
-        const titleFounded=sessionStorage.getItem('searchedTitle')
         
         setForUserMsg(false)
         
@@ -30,8 +29,6 @@ export default function MovieSearch() {
                 setTitleFound(titleFounded)
 
                 const moviesObject=JSON.parse(moviesFounded);
-                console.log(moviesObject)
-                
 
 
                 let posters=[];
@@ -60,8 +57,11 @@ export default function MovieSearch() {
             }
 
         }
+        else {
+            setForUserMsg(true)
+        }
         
-    },[]);
+    },[moviesFounded,titleFounded]);
 
     const sendMovieDates=(moviePoster:string,movieTitle:string,movieAvaliation:string,movieOverview:string,movieReleaseDate:string,movieId:string)=> {
         sessionStorage.setItem('poster',moviePoster)
@@ -74,29 +74,31 @@ export default function MovieSearch() {
 
 
     return (
-        <div className="bg-gray-900 h-screen">
-            <MenuBar/>
-        <div className='p-24 items-center justify-center'>
-            <h3 className="text-white font-bold text-2xl ml-24">{titleFound}</h3>
-            <div className='flex items-center justify-center'>
-                <div className="p-8 flex gap-3 flex-wrap mt-38 w-3/4"> 
-                {movies.map((movie, index) => (
-                    <div key={index} className="flex flex-col items-center"> {/* Adicionado um container flexível para alinhar o título e a imagem verticalmente */}
-                {moviePosters[index] ? (
-                    <Link href="/MoviePage">
-                        <button className={`h-80 w-56 bg-cover bg-center ${styles.movieSlide}`} style={{ backgroundImage: `url(${moviePosters[index]})`}}   onClick={()=>sendMovieDates(moviePosters[index], movie.original_title, movie.vote_average,movie.overview,movie.release_date,movie.id)}></button>
-                    </Link>
-                ): null}
-        </div>
-                ))}
+        <ProtectRoute>
+            <div className="bg-gray-900 h-screen">
+                <MenuBar/>
+                <div className='bg-gray-900 p-24 items-center justify-center'>
+                    <h3 className="text-white font-bold text-2xl lg:ml-32 md:ml-0">{titleFound}</h3>
+                    <div className='flex items-center justify-center'>
+                        <div className="p-8 flex gap-3 flex-wrap lg:mt-30 lg:w-3/4 md:w-full md:mt-10"> 
+                        {movies.map((movie, index) => (
+                            <div key={index} className="flex flex-col items-center"> {/* Adicionado um container flexível para alinhar o título e a imagem verticalmente */}
+                        {moviePosters[index] ? (
+                            <Link href="/MoviePage">
+                                <button className={`h-80 w-56 bg-cover bg-center ${styles.movieSlide}`} style={{ backgroundImage: `url(${moviePosters[index]})`}}   onClick={()=>sendMovieDates(moviePosters[index], movie.original_title, movie.vote_average,movie.overview,movie.release_date,movie.id)}></button>
+                            </Link>
+                        ): null}
+                </div>
+                        ))}
+                        </div>
                     </div>
                 </div>
+                {forUserMsg && 
+                    <div className="bg-gray-900 flex items-center justify-center">
+                        <h1 className="text-white text-2xl">Filme não encontrado</h1>
+                    </div>
+                }
             </div>
-            {forUserMsg && 
-                <div className="bg-gray-900 flex items-center justify-center">
-                    <h1 className="text-white text-2xl">Filme não encontrado</h1>
-                </div>
-            }
-        </div>
+        </ProtectRoute>
     )
 }

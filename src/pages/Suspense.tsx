@@ -1,6 +1,7 @@
 import ShowMoviesGenres from "@/components/ShowMoviesGenres"
 import '../styles/globals.css';
 import { useState,useEffect } from "react";
+import ProtectRoute from "@/components/ProtectRoute";
 
 
 export default function Suspense() {
@@ -20,21 +21,23 @@ export default function Suspense() {
     }
 
     return (
-        <div className="h-full bg-gray-900">
-            <ShowMoviesGenres genreCode={53} genreName="Suspense" genrePage={page}/>
-            <div className="w-full relative bottom-24 flex justify-end p-6">
-                <div className="flex w-72 gap-4">
-                    <div className="h-12 w-12 border-2 border-cyan-500 first:flex justify-center items-center">
-                        <button className="text-white text-xl font-semibold" onClick={()=>slidePage(1)}>1</button>
-                    </div> 
-                    <div className="h-12 w-12 border-2 border-cyan-500 flex justify-center items-center">
-                        <button className="text-white text-xl font-semibold" onClick={()=>slidePage(2)}>2</button>
-                    </div> 
-                    <div className="h-12 w-12 border-2 border-cyan-500 flex justify-center items-center">
-                        <button className="text-white text-xl font-semibold" onClick={()=>slidePage(3)}>3</button>
-                    </div> 
+        <ProtectRoute>
+            <div className="h-full bg-gray-900">
+                <ShowMoviesGenres genreCode={53} genreName="Suspense" genrePage={page}/>
+                <div className="w-full relative bottom-24 flex justify-end p-6">
+                    <div className="flex w-72 gap-4">
+                        <div className="h-12 w-12 border-2 border-cyan-500 first:flex justify-center items-center">
+                            <button className="text-white text-xl font-semibold" onClick={()=>slidePage(1)}>1</button>
+                        </div> 
+                        <div className="h-12 w-12 border-2 border-cyan-500 flex justify-center items-center">
+                            <button className="text-white text-xl font-semibold" onClick={()=>slidePage(2)}>2</button>
+                        </div> 
+                        <div className="h-12 w-12 border-2 border-cyan-500 flex justify-center items-center">
+                            <button className="text-white text-xl font-semibold" onClick={()=>slidePage(3)}>3</button>
+                        </div> 
+                    </div>
                 </div>
             </div>
-        </div>
+        </ProtectRoute>
     )
 }

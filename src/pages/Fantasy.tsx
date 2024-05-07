@@ -2,6 +2,7 @@
 import  ShowMoviesGenres from "@/components/ShowMoviesGenres"
 import '../styles/globals.css';
 import { useEffect, useState } from "react"
+import ProtectRoute from "@/components/ProtectRoute";
 
 
 export default function Fantasy() {
@@ -20,8 +21,9 @@ export default function Fantasy() {
     }
 
     return (
+        <ProtectRoute>
         <div className="bg-gray-900 h-full">
-            <ShowMoviesGenres genreCode={14} genreName="Fantasy" genrePage={page}/>
+            <ShowMoviesGenres genreCode={14} genreName="Fantasia" genrePage={page}/>
             <div className="w-full relative bottom-24 flex justify-end p-6">
                 <div className="flex w-72 gap-4">
                     <div className="h-12 w-12 border-2 border-cyan-500 first:flex justify-center items-center">
@@ -36,5 +38,6 @@ export default function Fantasy() {
                 </div>
             </div>
         </div>
+        </ProtectRoute>
     )
 }

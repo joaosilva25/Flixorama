@@ -46,43 +46,49 @@ export const MoviesBox = ({titleMovie,posterMovie,releaseDate,overviewMovie,genr
 
 
     return (
-        <div className='flex items-center justify-center'>
-            <div className='p-20 '>
-                {posterMovie && (
-                    <div className={`bg-cover bg-center flex items-center justify-center ${styles.boxMovies}`} style={{backgroundImage:`url(${posterMovie})`}}>
-                        <div className="btnMovies flex gap-2 mt-6 relative top-52">
+        <div className='flex items-center justify-center bg-gray-900 sm:flex-col md:flex-col lg:flex-row'>
+            <div className='p-20'>
+                {posterMovie &&
+                    <div className='bg-cover bg-center h-96 w-96 flex items-center justify-center sm:w-movieBoxMobile sm:h-movieBoxMobile md:w-movieBoxMdAndLgDevices md:h-movieBoxMdAndLgDevices lg:w-movieBoxMdAndLgDevices lg:h-movieBoxMdAndLgDevices' style={{backgroundImage:`url(${posterMovie})`}}>
+                        <div className="btnMovies flex gap-2 mt-6 relative top-52 sm:top-36">
                             {showTrailerButton &&
-                                <button className={`p-3 w-32 bg-black font-bold text-white ${styles.movieButton}`} onClick={showMovieTrailer}>
-                                    <FontAwesomeIcon className='text-white mr-2' icon={faPlay} />
-                                    Trailer
+                                <button className={`p-3 w-32 bg-black font-bold text-white flex justify-center items-center ${styles.movieButton} sm:w-24 sm:h-10`} onClick={showMovieTrailer}>
+                                    <FontAwesomeIcon className='text-white mr-2 sm:text-xs' icon={faPlay} />
+                                    <p className='text-sm sm:text-xs'>Trailer</p> 
                                 </button>
                             }
-                            <button className={`bg-cyan-500 text-white p-3 w-32 font-bold ${styles.movieButton}`} onClick={showMovieDescription}>
-                                <FontAwesomeIcon className='text-white mr-2' icon={showIcon}/>
-                                Detalhes
+                            <button className={`bg-cyan-500 text-white p-3 w-32 font-bold  flex justify-center items-center ${styles.movieButton} sm:w-24 sm:h-10`} onClick={showMovieDescription}>
+                                <FontAwesomeIcon className='text-white mr-2 sm:text-xs' icon={showIcon}/>
+                               <p className='text-sm sm:text-xs'>Detalhes</p> 
                             </button>
-                            <h3 className="text-white">{forAddListMsg}</h3>
-                            <button className={`p-3 w-32 bg-yellow-400 font-bold text-black ${styles.movieButton}`} onClick={()=>addMylist()}>
-                                <FontAwesomeIcon className='mr-2' icon={faPlus}/>
-                                My List
+                            <button className={`p-3 w-32 bg-yellow-600 font-bold text-white flex justify-center items-center ${styles.movieButton} sm:w-24 sm:h-10`} onClick={()=>addMylist()}>
+                                <FontAwesomeIcon className='mr-2 sm:text-xs' icon={faPlus}/>
+                                <p className='text-sm sm:text-xs'>{forAddListMsg}</p> 
                             </button>
                         </div>
                     </div>
-                )}
+                }
             </div>
             {movieDescription &&
-            <div className='p-24 w-1/2 flex items-center justify-center'>
+            <div className='p-24 flex items-center justify-center bg-gray-900 lg:w-1/2 md:w-full md:relative bottom-12'>
                 <div className='justify-center items-center'>
                     <h3 className="text-white font-black text-2xl mb-4">{titleMovie}</h3>
                     <p className="text-cyan-500 font-semibold text-2xl mb-4">{avaliationMovie}</p>
                     <p className="text-white font-bold mb-4 text-lg">{releaseDate}</p>
-                    <p className="text-white w-18 text-lg text-justify">{overviewMovie}</p>
+                    <p className="text-white w-18 text-lg text-justify sm:text-sm sm:text-left sm:w-72">{overviewMovie}</p>
                 </div>
             </div>
             }    
-            {movieShowTrailer &&     
-                <iframe className="bg-black" src={trailerMovie} width={500} height={400}/>
-            }
+            {movieShowTrailer && trailerMovie !=="" ? (
+                <div className='flex justify-center items-center sm:p-24 md:p-24'>
+                    <iframe className="bg-black sm:w-movieBoxMobile sm:h-60" src={trailerMovie} width={500} height={400}/>
+                </div>
+            ):(movieShowTrailer && trailerMovie=="" &&(
+                <div className='flex justify-center items-center sm:p-24 md:p-24'>
+                    <h1 className='text-white text-2xl font-bold text-center sm:text-sm sm:w-80'>Trailer Indisponível no momento</h1>
+                </div>
+            )
+            )}
         </div>
     );
 };

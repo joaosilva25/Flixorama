@@ -24,7 +24,6 @@ const SelectedMoviesCard=()=> {
 
         if(userLogged) {
             const objectUser=JSON.parse(userLogged);
-            console.log(objectUser.userExists.email)
 
             const updateUserLogged=async()=> {
                 const req=await fetch(`https://apicritiflixacesso.onrender.com/userData?email=${objectUser.userExists.email}`, {
@@ -56,11 +55,13 @@ const SelectedMoviesCard=()=> {
    
     useEffect(()=> {   
 
+        let apiKey:string|any=process.env.NODE_ENV==='development'?process.env.NEXT_PUBLIC_API_KEY:process.env.API_KEY
+
         const recommendMovies=async()=> {
-            console.log(genresCode)
+
             const genresCodeToString=genresCode.join(',');
 
-            const req=await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=23e36f1698459eaf0b278eb6a5a008b1&language=pt-BR&with_genres=${genresCodeToString}&sort_by=popularity.desc&vote_average.gte=6`)
+            const req=await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=pt-BR&with_genres=${genresCodeToString}&sort_by=popularity.desc&vote_average.gte=6`)
             const res=await req.json();
 
             if (res.results && res.results.length > 0) {
@@ -93,7 +94,7 @@ const SelectedMoviesCard=()=> {
     
         if(scrollSpace) {
             scrollSpace.scrollTo ({
-                left:scrollSpace.scrollLeft-=600,
+                left:scrollSpace.scrollLeft-=40,
                 behavior:'smooth'
             })
 
@@ -106,7 +107,7 @@ const SelectedMoviesCard=()=> {
     
         if(scrollSpace) {
             scrollSpace.scrollTo ({
-                left:scrollSpace.scrollLeft+=600,
+                left:scrollSpace.scrollLeft+=40,
                 behavior:'smooth'
             })
 
@@ -123,7 +124,6 @@ const SelectedMoviesCard=()=> {
         sessionStorage.setItem('releaseDate',movieReleaseDate)
         sessionStorage.setItem('genres',movieGenres)
         sessionStorage.setItem('id',movieId)
-    
     }
 
     return (
@@ -131,13 +131,13 @@ const SelectedMoviesCard=()=> {
             <button className="text-white" onClick={slideToLeft}>
                 <FontAwesomeIcon className={`${styles.iconSlideShow}`} icon={faAngleLeft} />
             </button>
-            <div className="flex gap-2  h-3/3 p-2 mt-10 overflow-x-hidden overscroll-y-none items-center justify-center" ref={scrollArea}>
+            <div className="flex gap-2 h-3/3 p-2 mt-10 overflow-x-hidden overscroll-y-none items-center justify-center" ref={scrollArea}>
                     <div className={`h-96 flex gap-2 ${styles.movieScrollArea}`}>
                 {recommendedMovies.map((movie, index) => (
                             <div key={index}> 
                             {recommendedMoviesPoster[index] && (
                                 <Link href="/MoviePage">
-                                    <div className={`h-80 w-52 bg-cover bg-center ${styles.selectedMovieSlide}`} style={{ backgroundImage: `url(${recommendedMoviesPoster[index]})`}} onClick={()=>sendMovieDates(recommendedMoviesPoster[index], movie.original_title, movie.vote_average,movie.overview,movie.release_date,movie.genre_ids,movie.id)}></div>
+                                    <div className={`h-80 w-52 bg-cover bg-center ${styles.selectedMovieSlide} sm:h-72`} style={{ backgroundImage: `url(${recommendedMoviesPoster[index]})`}} onClick={()=>sendMovieDates(recommendedMoviesPoster[index], movie.original_title, movie.vote_average,movie.overview,movie.release_date,movie.genre_ids,movie.id)}></div>
                                 </Link>
                             )}
                     </div>

@@ -3,8 +3,9 @@
 .boxMovies {
     height: 700px;
     width: 550px;
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 100px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 }
+
 
 
 .movieButton {
@@ -52,3 +53,4 @@
 .iconSlideShow:active {
     color:rgb(0, 195, 255)
 }
+
