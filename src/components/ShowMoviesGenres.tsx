@@ -21,8 +21,9 @@ const ShowMoviesGenres=({genreCode,genreName,genrePage}:Props)=> {
         const [moviePosters,setMoviePosters]=useState<string[]>([]);
     
         useEffect(() => {
-            let apiKey:string|any=process.env.NODE_ENV==='development'?process.env.NEXT_PUBLIC_API_KEY:process.env.API_KEY
 
+            let apiKey=process.env.NEXT_PUBLIC_API_KEY
+            
             const MovieRequest = async () => {
 
                 try {

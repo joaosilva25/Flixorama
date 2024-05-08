@@ -15,8 +15,10 @@ export default function MyList() {
 
     
     useEffect(()=> {
+        
         const userData=async()=> {
             const userLoggedIn=sessionStorage.getItem('userKey');
+
             if(userLoggedIn) {
                 const userObject=JSON.parse(userLoggedIn)
                 const email=userObject.userExists.email

@@ -5,8 +5,11 @@ import '../styles/globals.css';
 import styles from "../styles/HudMovies.module.css"
 import movie from "../types/movie"
 import ProtectRoute from "@/components/ProtectRoute";
+import { useRouter } from "next/router";
 
 export default function MovieSearch() {
+
+    const route=useRouter();
 
     const [movies,setMovies]=useState<any[]>([]);
     const [moviePosters,setMoviesPosters]=useState<string[]>([]);
@@ -67,13 +70,16 @@ export default function MovieSearch() {
         
     },[titleFounded]);
 
-    const sendMovieDates=(moviePoster:string,movieTitle:string,movieAvaliation:string,movieOverview:string,movieReleaseDate:string,movieId:string)=> {
-        sessionStorage.setItem('poster',moviePoster)
-        sessionStorage.setItem('title',movieTitle)
-        sessionStorage.setItem('avaliation',movieAvaliation)
-        sessionStorage.setItem('overview',movieOverview)
-        sessionStorage.setItem('releaseDate',movieReleaseDate)
-        sessionStorage.setItem('id',movieId)
+    const sendMovieDates=(moviePoster:string,movieTitle:string,movieAvaliation:string,movieOverview:string,movieReleaseDate:string,movieId:string,movieGenres:string)=> {
+            sessionStorage.setItem('poster',moviePoster)
+            sessionStorage.setItem('title',movieTitle)
+            sessionStorage.setItem('avaliation',movieAvaliation)
+            sessionStorage.setItem('overview',movieOverview)
+            sessionStorage.setItem('releaseDate',movieReleaseDate)
+            sessionStorage.setItem('id',movieId)
+            sessionStorage.setItem('genres',movieGenres)
+
+        route.push('/MoviePage')
     }
 
 
@@ -88,9 +94,7 @@ export default function MovieSearch() {
                         {movies.map((movie, index) => (
                             <div key={index} className="flex flex-col items-center"> {/* Adicionado um container flexível para alinhar o título e a imagem verticalmente */}
                         {moviePosters[index] ? (
-                            <Link href="/MoviePage">
-                                <button className={`h-80 w-56 bg-cover bg-center ${styles.movieSlide}`} style={{ backgroundImage: `url(${moviePosters[index]})`}}   onClick={()=>sendMovieDates(moviePosters[index], movie.original_title, movie.vote_average,movie.overview,movie.release_date,movie.id)}></button>
-                            </Link>
+                            <button className={`h-80 w-56 bg-cover bg-center ${styles.movieSlide}`} style={{ backgroundImage: `url(${moviePosters[index]})`}}   onClick={()=>sendMovieDates(moviePosters[index], movie.original_title, movie.vote_average,movie.overview,movie.release_date,movie.id,movie.genres_ids)}></button>
                         ): null}
                 </div>
                         ))}

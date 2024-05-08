@@ -32,7 +32,8 @@ export default function HomePage() {
     const MovieRequest = async () => {
         setForAddListMsg("Adicionar");
         try {
-            let apiKey:string|any=process.env.NODE_ENV==='development'?process.env.NEXT_PUBLIC_API_KEY:process.env.API_KEY
+            
+            let apiKey=process.env.NEXT_PUBLIC_API_KEY
 
             const req= await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=pt-BR&sort_by=popularity.desc`);
             

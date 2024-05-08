@@ -68,6 +68,7 @@ export default function Login() {
     }
 
     const loginUser=async()=> {
+        setForUserMessage("Carregando os Servidores ...");
         
         try {
             const req=await fetch('https://apicritiflixacesso.onrender.com/login', {

@@ -42,6 +42,15 @@ export default function MoviePage() {
         const id=sessionStorage.getItem('id');
 
 
+        console.log(title)
+        console.log(image)
+        console.log(avaliation)
+        console.log(overview)
+        console.log(release_date)
+        console.log(genres_ids)
+        console.log(id)
+
+
         if(title && image && avaliation && overview && release_date && genres_ids && id) {
             setMovieTitle(title)
             setMovieImage(image)
@@ -59,7 +68,7 @@ export default function MoviePage() {
     useEffect(()=> {
 
         const MovieReview=async()=> {
-            let apiKey:string|any=process.env.NODE_ENV==='development'?process.env.NEXT_PUBLIC_API_KEY:process.env.API_KEY
+            let apiKey=process.env.NEXT_PUBLIC_API_KEY
 
             const req=await fetch(`https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${apiKey}&language=pt-BR`)
             const res=await req.json();
