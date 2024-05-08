@@ -18,3 +18,7 @@
 .inputStyle::placeholder {
     color: rgba(255, 255, 255, 0.377);
 }
+
+.activeBtn:active {
+    transform: scale(1.1);
+}

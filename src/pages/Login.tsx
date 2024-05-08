@@ -39,7 +39,8 @@ export default function Login() {
     }
 
     const registerUser=async()=> {
-        setForUserMessage("");
+        setForUserMessage("Carregando os Servidores ...");
+        
         try {
             const req=await fetch('https://apicritiflixacesso.onrender.com/register', {
                 method: 'POST',
@@ -69,7 +70,7 @@ export default function Login() {
 
     const loginUser=async()=> {
         setForUserMessage("Carregando os Servidores ...");
-        
+
         try {
             const req=await fetch('https://apicritiflixacesso.onrender.com/login', {
                 method: 'POST',
@@ -133,7 +134,7 @@ export default function Login() {
                                 </button>
                             </div>
                             <div className='mt-8 flex flex-col gap-6 items-center sm:mt-0 md:w-96'>
-                                <button className='p-3 w-80 bg-cyan-500 text-white font-bold sm:w-64 sm:p-2 sm:text-sm' onClick={(e)=>{e.preventDefault();loginUser()}}>Entrar</button>
+                                <button className={`p-3 w-80 bg-cyan-500 text-white font-bold sm:w-64 sm:p-2 sm:text-sm ${styles.activeBtn}`} onClick={(e)=>{e.preventDefault();loginUser()}}>Entrar</button>
                                 <h5 className='text-white text-md w-72 text-center font-semibold sm:text-sm'>{forUserMessage}</h5>
                                 <button className='font-light text-white text-md mt-12 sm:mt-8 sm:text-sm' onClick={(e)=>{e.preventDefault();toggleAccessAreas()}}>Ainda não possui uma conta ? <span className='text-cyan-500 font-semibold'>Registre-se aqui</span></button>
                             </div>
@@ -177,7 +178,7 @@ export default function Login() {
                                 </button>
                             </div>
                             <div className='mt-8 flex flex-col items-center gap-12 sm:mt-0 sm:gap-8'>
-                                <button className='p-3 w-80 bg-cyan-500 text-white font-bold sm:w-64 sm:p-2 sm:text-sm' onClick={(e)=>{e.preventDefault();registerUser()}}>Registrar</button>
+                                <button className={`p-3 w-80 bg-cyan-500 text-white font-bold sm:w-64 sm:p-2 sm:text-sm ${styles.activeBtn}`} onClick={(e)=>{e.preventDefault();registerUser()}}>Registrar</button>
                                 <h5 className='text-white text-md w-72 text-center font-semibold sm:text-sm'>{forUserMessage}</h5>
                                 <button className='font-light text-white text-md sm:text-sm' onClick={toggleAccessAreas}>Já possuo uma conta ! <span className='text-cyan-500 font-semibold'>Entrar</span></button>
                             </div>
