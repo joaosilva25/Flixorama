@@ -6,6 +6,9 @@ import '../styles/globals.css';
 import { useEffect,useState } from 'react';
 import { useRouter } from 'next/router';
 
+type Props = {
+    movieInput?:string;
+}
 
 const MenuBar=()=> {
 
@@ -36,6 +39,7 @@ const MenuBar=()=> {
 
 
     const searchMovie=async()=> {
+
         let apiKey:string|any=process.env.NODE_ENV==='development'?process.env.NEXT_PUBLIC_API_KEY:process.env.API_KEY
 
         if(movieSearch!=="") {
@@ -43,11 +47,19 @@ const MenuBar=()=> {
                     
             const response=await req.json();
 
-            sessionStorage.setItem('foundMovies', JSON.stringify(response));
-            sessionStorage.setItem('searchedTitle',movieSearch)
+            if(response) {
+                sessionStorage.setItem('foundMovies', JSON.stringify(response));
+                console.log(response);
+                sessionStorage.setItem('searchedTitle',movieSearch)
+                console.log(movieSearch)
+
+                route.push('/MovieSearch')
+            }
+
         }
 
     }
+
 
     const showMenu=()=> {
         setVisibleMenu(!visibleMenu);
@@ -105,11 +117,9 @@ const MenuBar=()=> {
                             onChange={(e)=>setMovieSearch(e.target.value)}
                         >                  
                         </input>
-                        <Link href="/MovieSearch">
-                            <button onClick={searchMovie}>
+                        <button onClick={searchMovie}>
                                 <FontAwesomeIcon  className="text-white text-md sm:relative sm:right-4" icon={faMagnifyingGlass}/>
-                            </button>
-                        </Link>
+                        </button>
                 </div>
                 </div>
                 <div className='flex items-center gap-16'>

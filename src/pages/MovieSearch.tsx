@@ -10,23 +10,27 @@ export default function MovieSearch() {
 
     const [movies,setMovies]=useState<any[]>([]);
     const [moviePosters,setMoviesPosters]=useState<string[]>([]);
-    const [titleFound,setTitleFound]=useState("");
+    const [titleFound,setTitleFound]=useState<string|any>("");
     const [forUserMsg,setForUserMsg]=useState(false);
 
-    const moviesFounded:any|string=sessionStorage.getItem('foundMovies')
-    const titleFounded:any|string=sessionStorage.getItem('searchedTitle')
+    
+    const moviesFounded = typeof window !== 'undefined' ? sessionStorage.getItem('foundMovies') : null;
+    const titleFounded = typeof window !== 'undefined' ? sessionStorage.getItem('searchedTitle') : null;
+
 
     useEffect(()=> {
-        
+
         setForUserMsg(false)
         
         if(moviesFounded && titleFounded) {
 
             const moviesFoundedObject=JSON.parse(moviesFounded);
+            console.log(moviesFoundedObject)
         
             if (moviesFoundedObject.results.length>0 && titleFounded!=="") {
 
                 setTitleFound(titleFounded)
+                console.log(titleFound)
 
                 const moviesObject=JSON.parse(moviesFounded);
 
@@ -61,7 +65,7 @@ export default function MovieSearch() {
             setForUserMsg(true)
         }
         
-    },[moviesFounded,titleFounded]);
+    },[titleFounded]);
 
     const sendMovieDates=(moviePoster:string,movieTitle:string,movieAvaliation:string,movieOverview:string,movieReleaseDate:string,movieId:string)=> {
         sessionStorage.setItem('poster',moviePoster)
