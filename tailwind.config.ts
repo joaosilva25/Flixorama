@@ -14,7 +14,7 @@ const config: Config = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       screens: {
-        'sm': {'min': '360px', 'max': '639px'}, 
+        'sm': {'min': '320px', 'max': '639px'}, 
       },
       width: {
         'movieBoxMobile':'300px',

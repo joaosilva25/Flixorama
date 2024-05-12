@@ -34,7 +34,7 @@ const LoadingPage=()=> {
     return (
         <div className="flex justify-center items-center h-full">
             <div className="flex flex-col">
-                <h1 className="text-cyan-500 text-7xl font-semibold mb-5" style={{transition:'1s ease-in'}}><span className={`${letter} animate-pulse`}>Flixo</span>
+                <h1 className="text-cyan-500 text-7xl font-semibold mb-5 sm:text-2xl md:text-4xl" style={{transition:'1s ease-in'}}><span className={`${letter} animate-pulse sm:text-4xl md:text-5xl`}>Flixo</span>
                 {showAllLetter && 'rama'}</h1>
                 {showLoading && (<FontAwesomeIcon  className="text-2xl text-white animate-spin mt-5" icon={faSpinner}/>)}
             </div>
