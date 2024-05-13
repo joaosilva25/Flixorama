@@ -116,7 +116,7 @@ export default function HomePage() {
 
   return (
     <ProtectRoute>
-      <div className="bg-gray-900 h-screen sm:h-full">
+      <div className="bg-gray-900 h-screen sm:h-full xs:overflow-x-hidden">
         <>
           <MenuBar />
           <MoviesBox

@@ -10,6 +10,7 @@ export default function MyList() {
   const [movie, setMovie] = useState<movie[]>([]);
   const [moviePosters, setMoviePosters] = useState<string[]>([]);
   const [showMoviesList, setMoviesList] = useState(false);
+  const [emptyMovieList, setEmptyMovieList] = useState(false);
 
   useEffect(() => {
     const userData = async () => {
@@ -27,11 +28,18 @@ export default function MyList() {
         );
 
         const response = await req.json();
+        console.log(response);
 
         if (response) {
           setMoviesList(true);
+        
+          if(response.userExists.myList.length>0) {
+            setMovie(response.userExists.myList);
 
-          setMovie(response.userExists.myList);
+          }
+          else {
+            setEmptyMovieList(true);
+          }
 
           let posters = [];
 
@@ -71,6 +79,11 @@ export default function MyList() {
           <h3 className="text-white font-semibold text-2xl xs:text-xl xs:relative xs:right-8 sm:text-xl sm:relative sm:right-8 md:ml-0 lg:ml-32">
             Minha Lista
           </h3>
+          {emptyMovieList &&
+            <div className="flex text-center items-center justify-center h-96">
+                <h1 className="font-bold text-2xl text-white xs:text-base sm:text-base">+ Lista Vazia</h1>
+            </div>
+          }
           <div className="flex items-center justify-center md:w-full">
             <div className="p-8 flex items-center justify-center gap-3 flex-wrap mt-38">
               {showMoviesList ? (
@@ -101,8 +114,8 @@ export default function MyList() {
                   ))}
                 </div>
               ) : (
-                <div className="relative top-64 xs:top-12 sm:top-32">
-                  <div className="text-white text-3xl font-bold xs:text-base sm:text-xl">
+                <div className="relative top-40 xs:top-12 sm:top-32">
+                  <div className="text-white text-2xl font-bold xs:text-base sm:text-xl">
                     Carregando...
                   </div>
                 </div>

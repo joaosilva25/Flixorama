@@ -90,7 +90,7 @@ export default function Login() {
   };
 
   return (
-    <div className="overflow-hidden bg-gray-900 xs:overflow-auto">
+    <div className="overflow-hidden bg-gray-900 xs:overflow-y-scroll">
       {credential ? (
         <div className={`h-screen bg-gray-900 ${styles.bgImage}`}>
           <div className="flex items-center p-10 gap-4">
