@@ -42,9 +42,7 @@ Além disso, a gestão de usuários e registros é feita por meio de uma API ext
 <p>João Vitor da Silva Pinto</p>
 
 <p>Linkedin:</p>
-http://www.linkedin.com/in/joaovitordasilvap/
-
-
+<p>http://www.linkedin.com/in/joaovitordasilvap/</p>
 
 <p>Portifolio:</p>
 https://joaosilva25.github.io/Portifolio/
